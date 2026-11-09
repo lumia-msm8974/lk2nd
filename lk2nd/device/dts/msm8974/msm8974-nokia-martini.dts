@@ -1,0 +1,29 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Nokia Lumia 930 (RM-975 / RM-976 / RM-977) - codename "martini".
+ *
+ * lk1st target loaded by the BootShim UEFI application from the EFIESP
+ * partition. Bundling this DTB (LK2ND_BUNDLE_DTB=msm8974-nokia-martini.dtb)
+ * also selects the martini MEMBASE in target/msm8974/rules.mk.
+ */
+
+#include <skeleton64.dtsi>
+#include <lk2nd.dtsi>
+
+/ {
+	/*
+	 * Same platform/variant/SoC revision as the known working martini
+	 * lk1st device tree, written as a standard three-cell v1 entry.
+	 * The previous four-cell form (with a trailing 0) only parsed via the
+	 * LGE MSM8974 fallback and logged a "not a multiple of 12" warning;
+	 * the trailing cell was used as hardware subtype 0, which is also what
+	 * the v1 parser derives from variant_id >> 24 here, so the resulting
+	 * dt_entry is unchanged.
+	 */
+	qcom,msm-id = <QCOM_ID_MSM8974 0x10008 0x20002>;
+};
+
+&lk2nd {
+	model = "Nokia Lumia 930";
+	compatible = "nokia,martini";
+};
